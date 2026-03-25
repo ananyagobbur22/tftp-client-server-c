@@ -3,7 +3,7 @@
 #ifndef TFTP_H
 #define TFTP_H
 
-#include <stdint.h>
+#include <stdio.h>
 #include <arpa/inet.h>
 
 #define PORT 6969
@@ -11,7 +11,8 @@
 #define DATA_SIZE 512    // 4 bytes header + 512 bytes data
 
 // TFTP OpCodes
-typedef enum {
+typedef enum 
+{
     RRQ = 1,  // Read Request
     WRQ = 2,  // Write Request
     DATA = 3, // Data Packet

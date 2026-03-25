@@ -15,8 +15,7 @@ void send_file(int sockfd, struct sockaddr_in client_addr, socklen_t client_len,
     int block = 1;
     int bytes;
     int size;
-    tftp_packet pkt;
-    tftp_packet ack;
+    tftp_packet pkt, ack;
 
     fd = open(filename, O_RDONLY);
     if (fd < 0)
@@ -79,7 +78,7 @@ void receive_file(int sockfd, struct sockaddr_in client_addr, socklen_t client_l
     {
         int n;
 
-        n = recvfrom(sockfd, &pkt, BUFFER_SIZE, 0, (struct sockaddr *)&client_addr, &client_len);
+        n = recvfrom(sockfd, &pkt, BUFFER_SIZE, 0, (struct sockaddr *)&client_addr,  &client_len);
 
         bytes = n - 4;   // data size
         printf("Received packet %d data size %d\n", block, bytes);
@@ -109,10 +108,11 @@ void receive_file(int sockfd, struct sockaddr_in client_addr, socklen_t client_l
         ack.opcode = htons(ACK);
         ack.body.ack_packet.block_number = htons(block);
 
-        sendto(sockfd, &ack, 4, 0, (struct sockaddr *)&client_addr, client_len);
+        sendto(sockfd, &ack, 4, 0,   (struct sockaddr *)&client_addr,  client_len);
 
         printf("ACK sent for packet %d\n", block);
 
+        /* LAST PACKET condition */
         if (bytes < 512)
         {
             printf("End of file received\n");
