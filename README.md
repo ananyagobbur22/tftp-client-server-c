@@ -25,3 +25,18 @@ This project implements a simplified TFTP (Trivial File Transfer Protocol) using
 ## 🧪 Usage
 
 ### Compile
+
+
+tftp-client-server-c/
+│
+├── client/
+│   ├── tftp_client.c
+│   ├── tftp_client.h
+│
+├── server/
+│   ├── server.c
+│
+├── common/
+│   ├── tftp.h
+│
+├── README.md
